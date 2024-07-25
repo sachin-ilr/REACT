@@ -1,7 +1,10 @@
 import { FormEvent, useState } from "react";
 
 const Forms5 = () => {
-  const [person, setPerson] = useState({ name: "", age: 0 });
+  const [person, setPerson] = useState({
+    name: "",
+    age: "",
+  });
 
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault();
@@ -17,12 +20,13 @@ const Forms5 = () => {
             Name
           </label>
           <input
+            id="name"
+            className="form-control"
+            type="text"
+            value={person.name}
             onChange={(event) =>
               setPerson({ ...person, name: event.target.value })
             }
-            type="text"
-            id="name"
-            className="form-control"
           />
         </div>
         <div className="mb-3">
@@ -30,12 +34,13 @@ const Forms5 = () => {
             Age
           </label>
           <input
-            onChange={(event) =>
-              setPerson({ ...person, age: parseInt(event.target.value) })
-            }
-            type="number"
             id="age"
             className="form-control"
+            type="number"
+            value={person.age}
+            onChange={(event) =>
+              setPerson({ ...person, age: event.target.value })
+            }
           />
         </div>
         <button id="submit" className="btn btn-primary" type="submit">
