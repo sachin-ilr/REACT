@@ -1,8 +1,15 @@
-import { Forms1, Forms5, Forms6, Forms8 } from "./Components/Forms/index";
+import {
+  Forms1,
+  Forms5,
+  Forms6,
+  Forms8,
+  Forms9,
+} from "./Components/Forms/index";
 
 const App = () => {
   return (
     <>
+      <Forms9></Forms9>
       <Forms8></Forms8>
       <Forms6></Forms6>
       <Forms5></Forms5>
