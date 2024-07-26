@@ -1,24 +1,51 @@
-import {
-  Forms1,
-  Forms5,
-  Forms6,
-  Forms8,
-  Forms9,
-} from "./Components/Forms/index";
+import { useState } from "react";
+import { ExpenseList, Form } from "./ExpenseTracker/Components/index";
 
 const App = () => {
+  const [expenses, setExpenses] = useState([
+    { id: 1, description: "aaa", amount: 10, catagory: "utility" },
+    { id: 2, description: "bbb", amount: 10, catagory: "utility" },
+    { id: 3, description: "ccc", amount: 10, catagory: "utility" },
+    { id: 4, description: "ddd", amount: 10, catagory: "utility" },
+  ]);
+
   return (
     <>
-      <Forms9></Forms9>
-      <Forms8></Forms8>
-      <Forms6></Forms6>
-      <Forms5></Forms5>
-      <Forms1></Forms1>
+      <Form></Form>
+      <ExpenseList
+        expenses={expenses}
+        onDelete={(id) => setExpenses(expenses.filter((e) => e.id !== id))}
+      ></ExpenseList>
     </>
   );
 };
 
 export default App;
+
+//===============================================================================
+//Forms
+
+// import {
+//   Forms1,
+//   Forms5,
+//   Forms6,
+//   Forms8,
+//   Forms9,
+// } from "./Components/Forms/index";
+
+// const App = () => {
+//   return (
+//     <>
+//       <Forms9></Forms9>
+//       <Forms8></Forms8>
+//       <Forms6></Forms6>
+//       <Forms5></Forms5>
+//       <Forms1></Forms1>
+//     </>
+//   );
+// };
+
+// export default App;
 
 //==============================================================================
 // Before Forms
