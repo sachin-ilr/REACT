@@ -2,7 +2,7 @@ interface Expense {
   id: number;
   description: string;
   amount: number;
-  catagory: string;
+  category: string;
 }
 
 interface Props {
@@ -29,7 +29,7 @@ const ExpenseList = ({ expenses, onDelete }: Props) => {
             <tr key={expense.id}>
               <td>{expense.description}</td>
               <td>{expense.amount}</td>
-              <td>{expense.catagory}</td>
+              <td>{expense.category}</td>
               <td>
                 <button
                   className="btn btn-outline-danger"

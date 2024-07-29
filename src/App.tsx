@@ -1,24 +1,49 @@
 import { useState } from "react";
-import { ExpenseList, Form } from "./ExpenseTracker/Components/index";
+import {
+  ExpenseFilter,
+  ExpenseList,
+  ExpenseForm,
+} from "./ExpenseTracker/Components/index";
+import categories from "./ExpenseTracker/Categories";
 
-const App = () => {
+function App() {
+  const [selectedCategory, setSlectedCatagory] = useState("");
+
   const [expenses, setExpenses] = useState([
-    { id: 1, description: "aaa", amount: 10, catagory: "utility" },
-    { id: 2, description: "bbb", amount: 10, catagory: "utility" },
-    { id: 3, description: "ccc", amount: 10, catagory: "utility" },
-    { id: 4, description: "ddd", amount: 10, catagory: "utility" },
+    { id: 1, description: "aaa", amount: 10, category: "Utilities" },
+    { id: 2, description: "bbb", amount: 10, category: "Utilities" },
+    { id: 3, description: "ccc", amount: 10, category: "Utilities" },
+    { id: 4, description: "ddd", amount: 10, category: "Utilities" },
   ]);
+
+  const visibleExpenses = selectedCategory
+    ? expenses.filter((e) => e.category === selectedCategory)
+    : expenses;
 
   return (
     <>
-      <Form></Form>
+      <div className="mb-5">
+        <ExpenseForm
+          onSubmit={(newExpense) =>
+            setExpenses([
+              ...expenses,
+              { ...newExpense, id: expenses.length + 1 },
+            ])
+          }
+        />
+      </div>
+      <div className="mb-3">
+        <ExpenseFilter
+          onSelectCategory={(category) => setSlectedCatagory(category)}
+        ></ExpenseFilter>
+      </div>
       <ExpenseList
-        expenses={expenses}
+        expenses={visibleExpenses}
         onDelete={(id) => setExpenses(expenses.filter((e) => e.id !== id))}
       ></ExpenseList>
     </>
   );
-};
+}
 
 export default App;
 
