@@ -4,7 +4,6 @@ import {
   ExpenseList,
   ExpenseForm,
 } from "./ExpenseTracker/Components/index";
-import categories from "./ExpenseTracker/Categories";
 
 function App() {
   const [selectedCategory, setSlectedCatagory] = useState("");
