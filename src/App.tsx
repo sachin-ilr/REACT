@@ -1,7 +1,7 @@
 import axios, { AxiosError, CanceledError } from "axios";
 import { useEffect, useState } from "react";
 import { Axios } from "./Components/Backend/index";
-import { literal } from "zod";
+import { boolean, literal } from "zod";
 
 interface User {
   id: number;
@@ -10,28 +10,35 @@ interface User {
 
 function App() {
   const [users, setUsers] = useState<User[]>([]);
-
   const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const controller = new AbortController();
     // get -> promise -> res/err (usual method)
+    setIsLoading(true);
     axios
       .get<User[]>("https://jsonplaceholder.typicode.com/users", {
         signal: controller.signal,
       })
-      .then((res) => setUsers(res.data))
+      .then((res) => {
+        setUsers(res.data);
+        setIsLoading(false);
+      })
       .catch((err) => {
         if (err instanceof CanceledError) return;
         setError(err.message);
+        setIsLoading(false);
       });
+    // .finally(() => setIsLoading(false)); // ddoesnt' work in strict mode so need to duplicate the code
 
     return () => controller.abort();
   }, []);
 
   return (
     <>
-      <p className="text-danger">{error}</p>
+      {error && <p className="text-danger">{error}</p>}
+      {isLoading && <div className="spinner-border"></div>}
       <ul>
         {users.map((user) => (
           <li key={user.id}>{user.name}</li>
