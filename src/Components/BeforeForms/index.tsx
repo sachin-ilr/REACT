@@ -11,3 +11,4 @@ export { default as NavBar } from "./NavBar";
 export { default as Cart } from "./Cart";
 export { default as Game } from "./Game";
 export { default as ExpandableText } from "./ExpandableText";
+export { default as ProductList } from "./ProductList";

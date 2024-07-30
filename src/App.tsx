@@ -1,50 +1,77 @@
+// Back End
+
 import { useState } from "react";
-import {
-  ExpenseFilter,
-  ExpenseList,
-  ExpenseForm,
-} from "./ExpenseTracker/Components/index";
+import { ProductList } from "./Components/BeforeForms";
 
 function App() {
-  const [selectedCategory, setSlectedCatagory] = useState("");
-
-  const [expenses, setExpenses] = useState([
-    { id: 1, description: "aaa", amount: 10, category: "Utilities" },
-    { id: 2, description: "bbb", amount: 10, category: "Utilities" },
-    { id: 3, description: "ccc", amount: 10, category: "Utilities" },
-    { id: 4, description: "ddd", amount: 10, category: "Utilities" },
-  ]);
-
-  const visibleExpenses = selectedCategory
-    ? expenses.filter((e) => e.category === selectedCategory)
-    : expenses;
+  const [category, setCategory] = useState("");
 
   return (
     <>
-      <div className="mb-5">
-        <ExpenseForm
-          onSubmit={(newExpense) =>
-            setExpenses([
-              ...expenses,
-              { ...newExpense, id: expenses.length + 1 },
-            ])
-          }
-        />
-      </div>
-      <div className="mb-3">
-        <ExpenseFilter
-          onSelectCategory={(category) => setSlectedCatagory(category)}
-        ></ExpenseFilter>
-      </div>
-      <ExpenseList
-        expenses={visibleExpenses}
-        onDelete={(id) => setExpenses(expenses.filter((e) => e.id !== id))}
-      ></ExpenseList>
+      <select
+        className="form-select"
+        onChange={(event) => setCategory(event.target.value)}
+      >
+        <option value=""></option>
+        <option value="Clothing">Clothing</option>
+        <option value="Household">Household</option>
+      </select>
+      <ProductList category={category} />
     </>
   );
 }
 
 export default App;
+
+// Expoense Tracker
+
+// import { useState } from "react";
+// import {
+//   ExpenseFilter,
+//   ExpenseList,
+//   ExpenseForm,
+// } from "./ExpenseTracker/Components/index";
+
+// function App() {
+//   const [selectedCategory, setSlectedCatagory] = useState("");
+
+//   const [expenses, setExpenses] = useState([
+//     { id: 1, description: "aaa", amount: 10, category: "Utilities" },
+//     { id: 2, description: "bbb", amount: 10, category: "Utilities" },
+//     { id: 3, description: "ccc", amount: 10, category: "Utilities" },
+//     { id: 4, description: "ddd", amount: 10, category: "Utilities" },
+//   ]);
+
+//   const visibleExpenses = selectedCategory
+//     ? expenses.filter((e) => e.category === selectedCategory)
+//     : expenses;
+
+//   return (
+//     <>
+//       <div className="mb-5">
+//         <ExpenseForm
+//           onSubmit={(newExpense) =>
+//             setExpenses([
+//               ...expenses,
+//               { ...newExpense, id: expenses.length + 1 },
+//             ])
+//           }
+//         />
+//       </div>
+//       <div className="mb-3">
+//         <ExpenseFilter
+//           onSelectCategory={(category) => setSlectedCatagory(category)}
+//         ></ExpenseFilter>
+//       </div>
+//       <ExpenseList
+//         expenses={visibleExpenses}
+//         onDelete={(id) => setExpenses(expenses.filter((e) => e.id !== id))}
+//       ></ExpenseList>
+//     </>
+//   );
+// }
+
+// export default App;
 
 //===============================================================================
 //Forms
