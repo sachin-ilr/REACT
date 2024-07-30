@@ -1,28 +1,62 @@
-// Back End
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { Axios } from "./Components/Backend/index";
+import { literal } from "zod";
 
-import { useState } from "react";
-import { ProductList } from "./Components/BeforeForms";
+interface User {
+  id: number;
+  name: string;
+}
 
 function App() {
-  const [category, setCategory] = useState("");
+  const [users, setUsers] = useState<User[]>([]);
+
+  useEffect(() => {
+    axios
+      .get<User[]>("https://jsonplaceholder.typicode.com/users")
+      .then((res) => setUsers(res.data));
+  }, []);
 
   return (
     <>
-      <select
-        className="form-select"
-        onChange={(event) => setCategory(event.target.value)}
-      >
-        <option value=""></option>
-        <option value="Clothing">Clothing</option>
-        <option value="Household">Household</option>
-      </select>
-      <ProductList category={category} />
+      <ul>
+        {users.map((user) => (
+          <li key={user.id}>{user.name}</li>
+        ))}
+      </ul>
     </>
   );
 }
 
 export default App;
 
+//====================================================================================
+
+// // Back End - 1
+
+// import { useState } from "react";
+// import { ProductList } from "./Components/BeforeForms";
+
+// function App() {
+//   const [category, setCategory] = useState("");
+
+//   return (
+//     <>
+//       <select
+//         className="form-select"
+//         onChange={(event) => setCategory(event.target.value)}
+//       >
+//         <option value=""></option>
+//         <option value="Clothing">Clothing</option>
+//         <option value="Household">Household</option>
+//       </select>
+//       <ProductList category={category} />
+//     </>
+//   );
+// }
+
+// export default App;
+// ===================================================================================
 // Expoense Tracker
 
 // import { useState } from "react";
